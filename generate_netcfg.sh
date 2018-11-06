@@ -4,8 +4,8 @@
 
 set -e
 
-_dir=$(dirname "$(readlink -f "$0")")
-cd $_dir
+scriptDir=$(dirname "$(readlink -f "$0")")
+templatesDir=$scriptDir/templates
 
 device=$1
 address=$2
@@ -19,4 +19,4 @@ sed -e "s;%DEVICE%;$device;g" \
     -e "s;%NETMASK%;$netmask;g" \
     -e "s;%GATEWAY%;$gateway;g" \
     -e "s;%SEARCH_DOMAIN%;$searchDomain;g" \
-    -e "s;%NAMESERVER%;$nameserver;g" templates/netcfg.yaml.tpl
+    -e "s;%NAMESERVER%;$nameserver;g" $templatesDir/netcfg.yaml.tpl
