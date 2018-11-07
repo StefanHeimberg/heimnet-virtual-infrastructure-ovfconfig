@@ -52,3 +52,6 @@ fi
 echo "$authorizedKeys" | base64 --decode > /home/$name/.ssh/authorized_keys
 chmod 664 /home/$name/.ssh/authorized_keys
 chown -R ${name}:${name} /home/$name/.ssh
+
+echo "lock root user password"
+passwd -l root
