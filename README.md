@@ -30,8 +30,7 @@ root@ubuntu:~/heimnet-ovfconfig# ./install.sh
 * **guestinfo.ovf_adminuser_password** (Mandatory)\
   Hashed Passwort des Administration User
 
-  Hash Password:
-  $ openssl passwd -1 -salt $(openssl rand -base64 6) mypasswd123$
+  Hash Password: ```openssl passwd -1 -salt $(openssl -1 rand -base64 6) mypasswd123$```
 
 * **guestinfo.ovf_adminuser_authorized_keys** (Mandatory)\
   Authorized SSH Keys des Administration User
