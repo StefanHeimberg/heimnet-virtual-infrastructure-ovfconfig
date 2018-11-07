@@ -17,8 +17,26 @@ root@ubuntu:~/heimnet-ovfconfig# ./install.sh
 
 ## Guestinfo Properties
 
+### System
+
 * **guestinfo.ovf_hostname** (Mandatory)\
   Hostname des Systems
+
+### Adminuser
+
+* **guestinfo.ovf_adminuser_name** (Mandatory)\
+  Login id des Administration User
+
+* **guestinfo.ovf_adminuser_password** (Mandatory)\
+  Hashed Passwort des Administration User
+
+  Hash Password:
+  $ openssl passwd -1 -salt $(openssl rand -base64 6) mypasswd123$
+
+* **guestinfo.ovf_adminuser_authorized_keys** (Mandatory)\
+  Authorized SSH Keys des Administration User
+
+### Network
 
 * **guestinfo.ovf_address** (Optional)\
   IP Adresse in der CIDR Notation falls DHCP nicht verwendet wird.
