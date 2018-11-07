@@ -3,7 +3,7 @@ Description=Konfiguriert die VM aus den Guestinfo properties aus ESXi
 Before=network.target
 
 [Service]
-ExecStart=/root/heimnet-ovfconfig/ovfconfig.sh
+ExecStart=/root/heimnet-ovfconfig/scripts/ovfconfig.sh
 Type=oneshot
 RemainAfterExit=yes
 
