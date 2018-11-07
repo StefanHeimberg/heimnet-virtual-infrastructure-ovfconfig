@@ -1,0 +1,11 @@
+[Unit]
+Description=Konfiguriert die VM aus den Guestinfo properties aus ESXi
+Before=network.target
+
+[Service]
+ExecStart=/root/heimnet-ovfconfig/ovfconfig.sh
+Type=oneshot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
