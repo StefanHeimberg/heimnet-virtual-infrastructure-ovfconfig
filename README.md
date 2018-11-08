@@ -17,6 +17,8 @@ root@ubuntu:~/heimnet-ovfconfig# ./install.sh
 
 ## Guestinfo Properties
 
+Version: 0.1
+
 ### System
 
 * **guestinfo.hostname** (Mandatory)\
@@ -51,8 +53,8 @@ Wenn **guestinfo.address not ""** dann:
 * **guestinfo.nameserver** (Mandatory)\
   Standard Nameserver für Namensauflösung
 
-* **guestinfo.ntpserver** (Mandatory)\
-  Standard Zeitserver für Zeitsynchronisierung
+* **guestinfo.searchdomain** (Mandatory)\
+  Standard searchdomain für Namensauflösung
 
 ### Links
 
