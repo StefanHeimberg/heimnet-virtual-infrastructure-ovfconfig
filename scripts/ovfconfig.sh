@@ -52,13 +52,11 @@ fi
 # ---------------------------------------------------------
 
 readonly gi_address=$(get_guestinfo "address")
-readonly gi_domain=$(get_guestinfo "domain")
 readonly gi_gateway=$(get_guestinfo "gateway")
 readonly gi_nameserver=$(get_guestinfo "nameserver")
 readonly gi_searchdomain=$(get_guestinfo "searchdomain")
 
 echo "guestinfo property $prefix.address = ${gi_address}"
-echo "guestinfo property $prefix.domain = ${gi_domain}"
 echo "guestinfo property $prefix.gateway = ${gi_gateway}"
 echo "guestinfo property $prefix.nameserver = ${gi_nameserver}"
 echo "guestinfo property $prefix.searchdomain = ${gi_searchdomain}"

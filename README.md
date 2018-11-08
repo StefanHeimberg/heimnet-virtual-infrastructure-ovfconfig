@@ -17,7 +17,7 @@ root@ubuntu:~/heimnet-ovfconfig# ./install.sh
 
 ## Guestinfo Properties
 
-Version: 0.1
+Version: v0.2
 
 ### System
 
@@ -43,9 +43,6 @@ Version: 0.1
   IP Adresse in der CIDR Notation falls DHCP nicht verwendet wird.
 
 Wenn **guestinfo.address not ""** dann:
-
-* **guestinfo.domain** (Mandatory)\
-  Domain Name des Systems.
 
 * **guestinfo.gateway** (Mandatory)\
   Standard Gateway für Routing
