@@ -19,37 +19,37 @@ root@ubuntu:~/heimnet-ovfconfig# ./install.sh
 
 ### System
 
-* **guestinfo.ovf_hostname** (Mandatory)\
+* **guestinfo.hostname** (Mandatory)\
   Hostname des Systems
 
 ### Adminuser
 
-* **guestinfo.ovf_adminuser_name** (Mandatory)\
+* **guestinfo.adminuser_name** (Mandatory)\
   Login id des Administration User
 
-* **guestinfo.ovf_adminuser_password** (Mandatory)\
+* **guestinfo.adminuser_password_hash** (Mandatory)\
   Hashed Passwort des Administration User
 
   Hash Password: ```openssl passwd -1 -salt $(openssl rand -base64 6) mypasswd123$```
 
-* **guestinfo.ovf_adminuser_authorized_keys** (Mandatory)\
+* **guestinfo.adminuser_authorized_keys** (Mandatory)\
   Authorized SSH Keys des Administration User
 
 ### Network
 
-* **guestinfo.ovf_address** (Optional)\
+* **guestinfo.address** (Optional)\
   IP Adresse in der CIDR Notation falls DHCP nicht verwendet wird.
 
-Wenn **guestinfo.ovf_address not ""** dann:
+Wenn **guestinfo.address not ""** dann:
 
-* **guestinfo.ovf_domain** (Mandatory)\
+* **guestinfo.domain** (Mandatory)\
   Domain Name des Systems.
 
-* **guestinfo.ovf_gateway** (Mandatory)\
+* **guestinfo.gateway** (Mandatory)\
   Standard Gateway für Routing
 
-* **guestinfo.ovf_nameserver** (Mandatory)\
+* **guestinfo.nameserver** (Mandatory)\
   Standard Nameserver für Namensauflösung
 
-* **guestinfo.ovf_ntpserver** (Mandatory)\
+* **guestinfo.ntpserver** (Mandatory)\
   Standard Zeitserver für Zeitsynchronisierung

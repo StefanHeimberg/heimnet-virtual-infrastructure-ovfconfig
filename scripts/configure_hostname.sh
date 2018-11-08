@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# usage: ./configure_hostname.sh <hostname>
+
 set -e
 
 if [ -z "$1" ]; then
