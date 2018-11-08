@@ -25,31 +25,45 @@ if id -un $adminUserId > /dev/null 2>&1; then
 
     currentAdminUserName=$(id -un $adminUserId)
 
-    echo "kill all processes of user $currentAdminUserName"
-    pkill -u $currentAdminUserName || true
+    if [ "$currentAdminUserName" = "$name" ]; then
+        echo "admin user name match"
+    else
+        echo "admin user name does not match"
 
-    echo "delete user $currentAdminUserName"
-    userdel -r $currentAdminUserName
+        echo "kill all processes of user $currentAdminUserName"
+        pkill -u $currentAdminUserName || true
+
+        echo "delete user $currentAdminUserName"
+        userdel $currentAdminUserName
+
+        echo "adding user $name"
+        useradd -u $adminUserId -c "System Administrator" -G sudo -m -s /bin/bash $name
+    fi
 fi
 
-echo "adding user $name"
-useradd -u $adminUserId -c "System Administrator" -G sudo -m -s /bin/bash $name
-
-echo "changing password for $name"
-echo "${name}:${passwordHashed}" | chpasswd -e
+if [ ! -z "$passwordHashed" ]; then
+    echo "changing password for $name"
+    echo "${name}:${passwordHashed}" | chpasswd -e
+fi
 
 if [ ! -z "$authorizedKeys" ]; then
     echo "adding ssh keys for $name"
     if [ ! -d "/home/$name/.ssh" ]; then
-    mkdir -m 775 /home/$name/.ssh
-    chown ${name}:${name} /home/$name/.ssh
+        mkdir -m 775 /home/$name/.ssh
+        chown ${name}:${name} /home/$name/.ssh
     else
-    chmod 755 /home/$name/.ssh
+        chmod 755 /home/$name/.ssh
     fi
 
     echo "$authorizedKeys" | base64 --decode > /home/$name/.ssh/authorized_keys
     chmod 664 /home/$name/.ssh/authorized_keys
     chown -R ${name}:${name} /home/$name/.ssh
+
+    echo "deny ssh access with password authentication"
+    sed --in-place 's|PermitRootLogin yes|PermitRootLogin no|g' /etc/ssh/sshd_config
+    sed --in-place 's|#PasswordAuthentication yes|PasswordAuthentication no|g' /etc/ssh/sshd_config
+
+    systemctl restart ssh
 fi
 
 echo "lock root user password"

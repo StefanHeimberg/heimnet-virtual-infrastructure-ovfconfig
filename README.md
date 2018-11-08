@@ -53,3 +53,7 @@ Wenn **guestinfo.address not ""** dann:
 
 * **guestinfo.ntpserver** (Mandatory)\
   Standard Zeitserver für Zeitsynchronisierung
+
+### Links
+
+- https://www.virtuallyghetto.com/2011/01/how-to-extract-host-information-from.html
