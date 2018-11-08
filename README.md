@@ -21,36 +21,36 @@ Version: v0.2
 
 ### System
 
-* **guestinfo.hostname** (Mandatory)\
+* **guestinfo.heimnet.hostname** (Mandatory)\
   Hostname des Systems
 
 ### Adminuser
 
-* **guestinfo.adminuser_name** (Mandatory)\
+* **guestinfo.heimnet.adminuser_name** (Mandatory)\
   Login id des Administration User
 
-* **guestinfo.adminuser_password_hash** (Mandatory)\
+* **guestinfo.heimnet.adminuser_password_hash** (Mandatory)\
   Hashed Passwort des Administration User
 
   Hash Password: ```openssl passwd -1 -salt $(openssl rand -base64 6) mypasswd123$```
 
-* **guestinfo.adminuser_authorized_keys** (Mandatory)\
+* **guestinfo.heimnet.adminuser_authorized_keys** (Mandatory)\
   Authorized SSH Keys des Administration User
 
 ### Network
 
-* **guestinfo.address** (Optional)\
+* **guestinfo.heimnet.address** (Optional)\
   IP Adresse in der CIDR Notation falls DHCP nicht verwendet wird.
 
-Wenn **guestinfo.address not ""** dann:
+Wenn **guestinfo.heimnet.address not ""** dann:
 
-* **guestinfo.gateway** (Mandatory)\
+* **guestinfo.heimnet.gateway** (Mandatory)\
   Standard Gateway für Routing
 
-* **guestinfo.nameserver** (Mandatory)\
+* **guestinfo.heimnet.nameserver** (Mandatory)\
   Standard Nameserver für Namensauflösung
 
-* **guestinfo.searchdomain** (Mandatory)\
+* **guestinfo.heimnet.searchdomain** (Mandatory)\
   Standard searchdomain für Namensauflösung
 
 ### Links

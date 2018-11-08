@@ -43,7 +43,7 @@ echo "guestinfo property $prefix.adminuser_name = ${gi_adminuser_name}"
 echo "guestinfo property $prefix.adminuser_password_hash = ${gi_adminuser_password_hash}"
 echo "guestinfo property $prefix.adminuser_authorized_keys = ${gi_adminuser_authorized_keys}"
 
-if [ -n "$gi_adminuser_name" ] && [ -n "$gi_adminuser_password_hash"]; then
+if [ -n "$gi_adminuser_name" ] && [ -n "$gi_adminuser_password_hash" ]; then
     ${scriptDir}/configure_adminuser.sh $gi_adminuser_name $gi_adminuser_password_hash $gi_adminuser_authorized_keys
 fi
 
@@ -61,7 +61,7 @@ echo "guestinfo property $prefix.gateway = ${gi_gateway}"
 echo "guestinfo property $prefix.nameserver = ${gi_nameserver}"
 echo "guestinfo property $prefix.searchdomain = ${gi_searchdomain}"
 
-if [ -n "$gi_address" ] && [ -n "$gi_gateway"] && [ -n "$gi_nameserver"]; then
+if [ -n "$gi_address" ] && [ -n "$gi_gateway" ] && [ -n "$gi_nameserver" ]; then
     ${scriptDir}/configure_netcfg.sh 'ens160' $gi_address $gi_gateway $gi_nameserver $gi_searchdomain
 else
     ${scriptDir}/configure_netcfg.sh 'ens160'
