@@ -8,8 +8,8 @@ readonly scriptDir=$(dirname "$(readlink -f "$0")")
 exec >  >(tee -ia ~/ovfconfig.log)
 exec 2> >(tee -ia ~/ovfconfig-error.log >&2)
 
-echo "**** ovfconfig $(cat ${scriptDir}/version.txt) started at $(date +"%Y-%m-%d %H:%M:%S")"
-(>&2 echo "**** ovfconfig $(cat ${scriptDir}/version.txt) started at $(date +"%Y-%m-%d %H:%M:%S")")
+echo "**** ovfconfig started at $(date +"%Y-%m-%d %H:%M:%S")"
+(>&2 echo "**** ovfconfig started at $(date +"%Y-%m-%d %H:%M:%S")")
 
 readonly prefix='guestinfo.heimnet'
 
