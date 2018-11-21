@@ -34,7 +34,7 @@ root@ubuntu:~/heimnet-ovfconfig# ./install.sh
 
   Hashed Passwort des Administration User
 
-  Hash Password: ```openssl passwd -1 -salt $(openssl rand -base64 6) mypasswd123$```
+  Hash Password: ```python3 -c 'import crypt; print(crypt.crypt("mypass123$", crypt.mksalt(crypt.METHOD_SHA512)))'```
 
 **guestinfo.heimnet.adminuser_authorized_keys** (Mandatory)
 
