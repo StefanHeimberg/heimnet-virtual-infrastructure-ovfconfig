@@ -63,7 +63,7 @@ if [ ! -z "$authorizedKeys" ]; then
     sed --in-place 's|PermitRootLogin yes|PermitRootLogin no|g' /etc/ssh/sshd_config
     sed --in-place 's|#PasswordAuthentication yes|PasswordAuthentication no|g' /etc/ssh/sshd_config
 
-    systemctl restart ssh
+    systemctl is-active --quiet ssh && systemctl restart ssh
 fi
 
 echo "lock root user password"
