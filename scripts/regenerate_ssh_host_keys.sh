@@ -7,4 +7,4 @@ echo "reconfigure server to generate new host keys"
 dpkg-reconfigure openssh-server
 
 echo "restart ssh server"
-sudo systemctl restart ssh
+systemctl is-active --quiet ssh && systemctl restart ssh

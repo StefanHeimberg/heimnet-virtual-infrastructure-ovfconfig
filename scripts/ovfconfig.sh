@@ -20,6 +20,17 @@ function get_guestinfo() {
 }
 
 # ---------------------------------------------------------
+# Regenerate SSH Host Keys
+# ---------------------------------------------------------
+
+readonly regenerateSshHostKeyMarkerFile="~/.ovfconfig-ssh_host_keys.regenerated"
+
+if [ ! -f "${regenerateSshHostKeyMarkerFile}" ]; then
+    ${scriptDir}/regenerate_ssh_host_keys.sh
+    touch ${regenerateSshHostKeyMarkerFile}
+fi
+
+# ---------------------------------------------------------
 # Configure Hostname
 # ---------------------------------------------------------
 
