@@ -8,8 +8,8 @@ readonly scriptDir=$(dirname "$(readlink -f "$0")")
 exec >  >(tee -ia ~/ovfconfig.log)
 exec 2> >(tee -ia ~/ovfconfig-error.log >&2)
 
-echo "**** ovfconfig started at $(date +"%Y-%m-%d %H:%M:%S")"
-(>&2 echo "**** ovfconfig started at $(date +"%Y-%m-%d %H:%M:%S")")
+echo "****** ovfconfig started at $(date +"%Y-%m-%d %H:%M:%S")"
+(>&2 echo "****** ovfconfig started at $(date +"%Y-%m-%d %H:%M:%S")")
 
 readonly prefix='guestinfo.heimnet'
 
@@ -23,7 +23,9 @@ function get_guestinfo() {
 # Regenerate SSH Host Keys
 # ---------------------------------------------------------
 
-readonly regenerateSshHostKeyMarkerFile="~/.ovfconfig-ssh_host_keys.regenerated"
+echo "  +--- regenerate ssh host keys"
+
+readonly regenerateSshHostKeyMarkerFile="/root/.ovfconfig-ssh_host_keys.regenerated"
 
 if [ ! -f "${regenerateSshHostKeyMarkerFile}" ]; then
     ${scriptDir}/regenerate_ssh_host_keys.sh
@@ -34,9 +36,11 @@ fi
 # Configure Hostname
 # ---------------------------------------------------------
 
+echo "  +--- configure hostname"
+
 readonly gi_hostname=$(get_guestinfo "hostname")
 
-echo "guestinfo property $prefix.hostname = ${gi_hostname}"
+echo "       guestinfo property $prefix.hostname = ${gi_hostname}"
 
 if [ -n "$gi_hostname" ]; then
     ${scriptDir}/configure_hostname.sh $gi_hostname
@@ -46,31 +50,38 @@ fi
 # Configure Admin User
 # ---------------------------------------------------------
 
+echo "  +--- configure admin user"
+
 readonly gi_adminuser_name=$(get_guestinfo "adminuser_name")
 readonly gi_adminuser_password_hash=$(get_guestinfo "adminuser_password_hash")
 readonly gi_adminuser_authorized_keys=$(get_guestinfo "adminuser_authorized_keys")
 
-echo "guestinfo property $prefix.adminuser_name = ${gi_adminuser_name}"
-echo "guestinfo property $prefix.adminuser_password_hash = ${gi_adminuser_password_hash}"
-echo "guestinfo property $prefix.adminuser_authorized_keys = ${gi_adminuser_authorized_keys}"
+echo "       guestinfo property $prefix.adminuser_name = ${gi_adminuser_name}"
+echo "       guestinfo property $prefix.adminuser_password_hash = ${gi_adminuser_password_hash}"
+echo "       guestinfo property $prefix.adminuser_authorized_keys = ${gi_adminuser_authorized_keys}"
 
 if [ -n "$gi_adminuser_name" ] && [ -n "$gi_adminuser_password_hash" ]; then
     ${scriptDir}/configure_adminuser.sh $gi_adminuser_name $gi_adminuser_password_hash $gi_adminuser_authorized_keys
+
+    echo "       lock root user password"
+    passwd -l root
 fi
 
 # ---------------------------------------------------------
 # Configure Networking
 # ---------------------------------------------------------
 
+echo "  +--- configure networking"
+
 readonly gi_address=$(get_guestinfo "address")
 readonly gi_gateway=$(get_guestinfo "gateway")
 readonly gi_nameserver=$(get_guestinfo "nameserver")
 readonly gi_searchdomain=$(get_guestinfo "searchdomain")
 
-echo "guestinfo property $prefix.address = ${gi_address}"
-echo "guestinfo property $prefix.gateway = ${gi_gateway}"
-echo "guestinfo property $prefix.nameserver = ${gi_nameserver}"
-echo "guestinfo property $prefix.searchdomain = ${gi_searchdomain}"
+echo "       guestinfo property $prefix.address = ${gi_address}"
+echo "       guestinfo property $prefix.gateway = ${gi_gateway}"
+echo "       guestinfo property $prefix.nameserver = ${gi_nameserver}"
+echo "       guestinfo property $prefix.searchdomain = ${gi_searchdomain}"
 
 if [ -n "$gi_address" ] && [ -n "$gi_gateway" ] && [ -n "$gi_nameserver" ]; then
     ${scriptDir}/configure_netcfg.sh 'ens160' $gi_address $gi_gateway $gi_nameserver $gi_searchdomain

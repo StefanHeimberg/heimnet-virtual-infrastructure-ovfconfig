@@ -2,8 +2,6 @@
 
 # usage: ./configure_adminuser.sh <login> <password_hashed> <authorized_keys>
 
-set -e
-
 if [ -z "$1" ]; then
     (>&2 echo "ERROR: name parameter missing. use $0 <login> <password_hashed> <authorized_keys>")
     exit 1
@@ -19,6 +17,8 @@ passwordHashed=$2
 authorizedKeys=$3
 
 adminUserId=1000
+
+echo "... admin user:"
 
 if id -un $adminUserId > /dev/null 2>&1; then
     echo "admin user exists"
@@ -41,10 +41,14 @@ if id -un $adminUserId > /dev/null 2>&1; then
     fi
 fi
 
+echo "... admin password:"
+
 if [ ! -z "$passwordHashed" ]; then
     echo "changing password for $name"
     echo "${name}:${passwordHashed}" | chpasswd -e
 fi
+
+echo "... admin ssh keys:"
 
 if [ ! -z "$authorizedKeys" ]; then
     echo "adding ssh keys for $name"
@@ -63,8 +67,11 @@ if [ ! -z "$authorizedKeys" ]; then
     sed --in-place 's|PermitRootLogin yes|PermitRootLogin no|g' /etc/ssh/sshd_config
     sed --in-place 's|#PasswordAuthentication yes|PasswordAuthentication no|g' /etc/ssh/sshd_config
 
-    systemctl is-active --quiet ssh && systemctl restart ssh
+    echo "restart ssh server"
+    if systemctl is-active --quiet ssh; then
+        echo "ssh is active. restart ssh to activate settings"
+        #systemctl restart ssh
+    else
+        echo "ssh is not active. do not restrat ssh"
+    fi
 fi
-
-echo "lock root user password"
-passwd -l root

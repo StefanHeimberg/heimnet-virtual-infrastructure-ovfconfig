@@ -1,11 +1,12 @@
 [Unit]
 Description=Heimnet OVFConfig
-Before=network.target
+Before=networking.service
 
 [Service]
 Type=oneshot
 ExecStart=/root/heimnet-ovfconfig/scripts/ovfconfig.sh
 TimeoutSec=30
+RemainAfterExit=yes
 
 [Install]
-WantedBy=multi-user.target
+RequiredBy=networking.service
