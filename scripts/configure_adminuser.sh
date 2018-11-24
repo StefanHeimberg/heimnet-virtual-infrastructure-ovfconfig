@@ -66,12 +66,4 @@ if [ ! -z "$authorizedKeys" ]; then
     echo "deny ssh access with password authentication"
     sed --in-place 's|PermitRootLogin yes|PermitRootLogin no|g' /etc/ssh/sshd_config
     sed --in-place 's|#PasswordAuthentication yes|PasswordAuthentication no|g' /etc/ssh/sshd_config
-
-    echo "restart ssh server"
-    if systemctl is-active --quiet ssh; then
-        echo "ssh is active. restart ssh to activate settings"
-        #systemctl restart ssh
-    else
-        echo "ssh is not active. do not restrat ssh"
-    fi
 fi
