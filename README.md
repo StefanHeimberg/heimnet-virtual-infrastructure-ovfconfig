@@ -1,4 +1,4 @@
-# Heimnet OVFConfig
+# Heimnet Virtual Infrastructure OVFConfig
 Scripts um eine Virtuelle Machine über OVF Properties zu konfigurieren
 
 ## Requirements
